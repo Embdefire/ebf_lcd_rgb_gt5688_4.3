@@ -612,7 +612,7 @@ Output:
  int32_t GTP_Init_Panel(void)
 {
     int32_t ret = -1;
-
+#if UPDATE_CONFIG
     int32_t i = 0;
     uint16_t check_sum = 0;
     int32_t retry = 0;
@@ -622,16 +622,11 @@ Output:
 		uint8_t* config;
 
     uint8_t cfg_num =0 ;		//需要配置的寄存器个数
-
+#endif
     GTP_DEBUG_FUNC();
 	
 //uint8_t config[GTP_CONFIG_MAX_LENGTH + GTP_ADDR_LENGTH]
 //                = {GTP_REG_CONFIG_DATA >> 8, GTP_REG_CONFIG_DATA & 0xff};
-
-		config = (uint8_t *)malloc (GTP_CONFIG_MAX_LENGTH + GTP_ADDR_LENGTH);
-
-		config[0] = GTP_REG_CONFIG_DATA >> 8;
-		config[1] =  GTP_REG_CONFIG_DATA & 0xff;
 	
     I2C_Touch_Init();
 
@@ -644,6 +639,13 @@ Output:
 		
 		//获取触摸IC的型号
     GTP_Read_Version(); 
+    
+#if UPDATE_CONFIG
+    
+    config = (uint8_t *)malloc (GTP_CONFIG_MAX_LENGTH + GTP_ADDR_LENGTH);
+
+		config[0] = GTP_REG_CONFIG_DATA >> 8;
+		config[1] =  GTP_REG_CONFIG_DATA & 0xff;
 		
 		//根据IC的型号指向不同的配置
     	if(touchIC == GT5688)
@@ -740,14 +742,14 @@ Output:
 	    		GTP_DEBUG("Config success ! i = %d ",i);
 	}
 #endif
-	
-		
+	free(config);
+#endif
 	 /*使能中断，这样才能检测触摸数据*/
 		I2C_GTP_IRQEnable();
 	
     GTP_Get_Info();
 		
-		free(config);
+		
 
     return 0;
 }

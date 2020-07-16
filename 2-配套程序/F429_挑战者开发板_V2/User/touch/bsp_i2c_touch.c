@@ -16,7 +16,7 @@
   */ 
 
 #include "./touch/bsp_i2c_touch.h"
-#include "./touch/gt9xx.h"
+#include "./touch/gt5xx.h"
 #include "./usart/bsp_debug_usart.h"
 
 

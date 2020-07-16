@@ -20,7 +20,7 @@
 #include "./usart/bsp_debug_usart.h"
 #include "./sdram/bsp_sdram.h"
 #include "./lcd/bsp_lcd.h"
-#include "./touch/gt9xx.h"
+#include "./touch/gt5xx.h"
 #include "./touch/palette.h"
 
 

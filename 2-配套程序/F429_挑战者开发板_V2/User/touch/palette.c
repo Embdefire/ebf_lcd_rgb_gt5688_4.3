@@ -16,7 +16,7 @@
   */
 
 #include "./touch/palette.h"
-#include "./touch/gt9xx.h"
+#include "./touch/gt5xx.h"
 #include "./lcd/bsp_lcd.h"
  
 /*按钮结构体数组*/
